@@ -1871,8 +1871,57 @@ const CACHE_TTL =
 const HIDDEN_REPOS =
 new Set(["-"]);
 
+
+/* ================================
+   BIRTHDAY CONSTANTS
+   (объявлены здесь, в самом начале,
+   т.к. updateLanguage() вызывается
+   сразу при загрузке и дёргает
+   updateCountdown() — а const нельзя
+   использовать до строки объявления)
+================================ */
+
+const BIRTHDAY_DAY = 29;
+const BIRTHDAY_MONTH = 11; // Декабрь: месяцы начинаются с 0
+const BIRTH_YEAR = 2012;
+
+
+/* ================================
+   SAFE LOCALSTORAGE
+   (localStorage может быть заблокирован
+   браузером/настройками приватности —
+   без этой обёртки одна такая ошибка
+   останавливала вообще весь скрипт:
+   и таймер, и репозитории)
+================================ */
+
+function safeStorageGet(key){
+
+try{
+
+return localStorage.getItem(key);
+
+}catch{
+
+return null;
+
+}
+
+}
+
+function safeStorageSet(key,value){
+
+try{
+
+localStorage.setItem(key,value);
+
+}catch{}
+
+}
+
+
 let language =
-localStorage.getItem("vizor-language")
+safeStorageGet("vizor-language")
 || "ru";
 
 
@@ -1906,7 +1955,7 @@ language === "ru"
 ? "RU"
 : "EN";
 
-localStorage.setItem(
+safeStorageSet(
 "vizor-language",
 language
 );
@@ -1936,7 +1985,12 @@ updateLanguage();
 
 /* ================================
    COLOR SETTINGS (THEME)
+   (обёрнуто в try/catch, чтобы ошибка
+   тут не останавливала репозитории
+   и таймер ниже по скрипту)
 ================================ */
+
+try{
 
 const THEME_KEY =
 "vizor-theme";
@@ -2222,6 +2276,15 @@ settingsPanel.classList.remove(
 
 }
 );
+
+}catch(error){
+
+console.error(
+"Theme/settings init failed:",
+error
+);
+
+}
 
 
 /* ================================
@@ -2583,11 +2646,6 @@ loadRepositories();
 /* ================================
    COUNTDOWN TIMER
 ================================ */
-
-const BIRTHDAY_DAY = 29;
-const BIRTHDAY_MONTH = 11; // Декабрь: месяцы начинаются с 0
-
-const BIRTH_YEAR = 2013;
 
 function getNextBirthday(){
 
