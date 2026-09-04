@@ -447,6 +447,7 @@ header{
 #countdown{
     padding-top:40px;
     padding-bottom:80px;
+    content-visibility:visible;
 }
 
 .countdown-card{
@@ -1618,7 +1619,7 @@ data-en="Setup and optimization">
 
 <!-- GITHUB -->
 
-<section>
+<section style="content-visibility:visible">
 
 <div class="container">
 
@@ -1861,7 +1862,7 @@ const CACHE_KEY =
 "vizor-github-cache";
 
 const CACHE_TTL =
-60 * 60 * 1000;
+24 * 60 * 60 * 1000;
 
 let language =
 localStorage.getItem("vizor-language")
