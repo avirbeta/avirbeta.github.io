@@ -6,6 +6,10 @@
 
 <title>Vizor — Developer</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;850;900;950&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --c-purple:#c026ff;
@@ -1864,6 +1868,9 @@ const CACHE_KEY =
 const CACHE_TTL =
 24 * 60 * 60 * 1000;
 
+const HIDDEN_REPOS =
+new Set(["-"]);
+
 let language =
 localStorage.getItem("vizor-language")
 || "ru";
@@ -2356,7 +2363,10 @@ if(cacheIsFresh){
 
 renderRepositories(
 container,
-cached.repositories
+cached.repositories.filter(
+repo =>
+!HIDDEN_REPOS.has(repo.name)
+)
 );
 
 return;
@@ -2373,6 +2383,10 @@ writeCache(repositories);
 renderRepositories(
 container,
 repositories
+.filter(
+repo =>
+!HIDDEN_REPOS.has(repo.name)
+)
 );
 
 }catch(error){
