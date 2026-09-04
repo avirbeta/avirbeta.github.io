@@ -442,20 +442,17 @@ header{
     background:rgba(255,255,255,.1);
 }
 
-/* COUNTDOWN SECTION */
+/* COUNTDOWN */
 
 #countdown{
-    padding:60px 6%;
-}
-
-.countdown-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:18px;
+    padding-top:40px;
+    padding-bottom:80px;
 }
 
 .countdown-card{
-    padding:28px;
+    max-width:760px;
+    margin:auto;
+    padding:30px;
 
     border-radius:20px;
 
@@ -464,47 +461,73 @@ header{
     border:1px solid rgba(255,255,255,.08);
 
     transition:.25s;
+
+    text-align:center;
 }
 
 .countdown-card:hover{
     transform:translateY(-4px);
-    border-color:rgba(var(--c-purple-rgb),.45);
-    box-shadow:0 0 30px rgba(var(--c-purple-rgb),.18);
+
+    border-color:
+        rgba(var(--c-purple-rgb),.45);
+
+    box-shadow:
+        0 0 30px rgba(var(--c-purple-rgb),.18);
 }
 
 .countdown-title{
     color:var(--c-purple);
+
     font-size:12px;
     font-weight:900;
+
     letter-spacing:2px;
+    text-transform:uppercase;
+
     margin-bottom:12px;
 }
 
 .countdown-date{
-    font-size:18px;
-    font-weight:800;
     color:#e5e7eb;
-    margin-bottom:18px;
+
+    font-size:24px;
+    font-weight:850;
+
+    margin-bottom:24px;
 }
 
 .countdown-timer{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
 }
 
 .countdown-item{
-    text-align:center;
-    padding:14px 8px;
-    border-radius:12px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.07);
+    padding:18px 10px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.07);
 }
 
 .countdown-value{
-    font-size:26px;
+    font-size:36px;
     font-weight:950;
-    background:linear-gradient(90deg,var(--c-purple-light),var(--c-blue));
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--c-purple-light),
+            var(--c-blue)
+        );
+
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -512,10 +535,48 @@ header{
 
 .countdown-label{
     color:#71717a;
+
     font-size:11px;
-    margin-top:4px;
-    text-transform:uppercase;
     font-weight:700;
+
+    margin-top:5px;
+    text-transform:uppercase;
+}
+
+.birthday-age{
+    color:#a1a1aa;
+
+    font-size:15px;
+    font-weight:700;
+
+    margin-top:22px;
+}
+
+@media(max-width:500px){
+
+    .countdown-card{
+        padding:20px 12px;
+    }
+
+    .countdown-date{
+        font-size:20px;
+    }
+
+    .countdown-timer{
+        gap:6px;
+    }
+
+    .countdown-item{
+        padding:13px 5px;
+    }
+
+    .countdown-value{
+        font-size:22px;
+    }
+
+    .countdown-label{
+        font-size:9px;
+    }
 }
 
 /* SECTIONS */
@@ -980,10 +1041,6 @@ footer{
         grid-template-columns:
             repeat(2,1fr);
     }
-
-    .countdown-grid{
-        grid-template-columns:1fr;
-    }
 }
 
 @media(max-width:500px){
@@ -1023,14 +1080,6 @@ footer{
         right:20px;
         left:20px;
         width:auto;
-    }
-
-    .countdown-timer{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .countdown-value{
-        font-size:20px;
     }
 }
 </style>
@@ -1217,107 +1266,93 @@ data-en="View projects">
 
 <h2
 class="title"
-data-ru="До дня рождения"
-data-en="Until birthday">
-До дня рождения
+data-ru="До моего дня рождения"
+data-en="Until my birthday">
+До моего дня рождения
 </h2>
-
-<div class="countdown-grid">
 
 <div class="countdown-card">
 
-<div class="countdown-title"
-data-ru="Следующий день рождения"
-data-en="Next birthday">
+<div
+class="countdown-title"
+id="countdownTitle">
 Следующий день рождения
 </div>
 
-<div class="countdown-date"
+<div
+class="countdown-date"
 id="nextBirthdayDate">
 29 декабря 2026
 </div>
 
-<div class="countdown-timer"
-id="nextBirthdayTimer">
+<div class="countdown-timer">
 
 <div class="countdown-item">
-<div class="countdown-value" id="nextDays">00</div>
-<div class="countdown-label"
+<div
+class="countdown-value"
+id="nextDays">
+00
+</div>
+
+<div
+class="countdown-label"
 data-ru="Дней"
-data-en="Days">Дней</div>
+data-en="Days">
+Дней
+</div>
 </div>
 
 <div class="countdown-item">
-<div class="countdown-value" id="nextHours">00</div>
-<div class="countdown-label"
+<div
+class="countdown-value"
+id="nextHours">
+00
+</div>
+
+<div
+class="countdown-label"
 data-ru="Часов"
-data-en="Hours">Часов</div>
+data-en="Hours">
+Часов
+</div>
 </div>
 
 <div class="countdown-item">
-<div class="countdown-value" id="nextMinutes">00</div>
-<div class="countdown-label"
+<div
+class="countdown-value"
+id="nextMinutes">
+00
+</div>
+
+<div
+class="countdown-label"
 data-ru="Минут"
-data-en="Minutes">Минут</div>
+data-en="Minutes">
+Минут
+</div>
 </div>
 
 <div class="countdown-item">
-<div class="countdown-value" id="nextSeconds">00</div>
-<div class="countdown-label"
+<div
+class="countdown-value"
+id="nextSeconds">
+00
+</div>
+
+<div
+class="countdown-label"
 data-ru="Секунд"
-data-en="Seconds">Секунд</div>
+data-en="Seconds">
+Секунд
+</div>
 </div>
 
 </div>
 
-</div>
-
-<div class="countdown-card">
-
-<div class="countdown-title"
-data-ru="После него"
-data-en="After that">
-После него
-</div>
-
-<div class="countdown-date"
-id="afterBirthdayDate">
-29 декабря 2027
-</div>
-
-<div class="countdown-timer"
-id="afterBirthdayTimer">
-
-<div class="countdown-item">
-<div class="countdown-value" id="afterDays">00</div>
-<div class="countdown-label"
-data-ru="Дней"
-data-en="Days">Дней</div>
-</div>
-
-<div class="countdown-item">
-<div class="countdown-value" id="afterHours">00</div>
-<div class="countdown-label"
-data-ru="Часов"
-data-en="Hours">Часов</div>
-</div>
-
-<div class="countdown-item">
-<div class="countdown-value" id="afterMinutes">00</div>
-<div class="countdown-label"
-data-ru="Минут"
-data-en="Minutes">Минут</div>
-</div>
-
-<div class="countdown-item">
-<div class="countdown-value" id="afterSeconds">00</div>
-<div class="countdown-label"
-data-ru="Секунд"
-data-en="Seconds">Секунд</div>
-</div>
-
-</div>
-
+<div
+class="birthday-age"
+id="birthdayAge">
+Сейчас мне 13 лет
 </div>
 
 </div>
@@ -1867,6 +1902,10 @@ localStorage.setItem(
 "vizor-language",
 language
 );
+
+if(typeof updateCountdown === "function"){
+updateCountdown();
+}
 
 }
 
@@ -2531,64 +2570,158 @@ loadRepositories();
 ================================ */
 
 const BIRTHDAY_DAY = 29;
-const BIRTHDAY_MONTH = 11; // Декабрь (0-индексированный)
+const BIRTHDAY_MONTH = 11; // Декабрь: месяцы начинаются с 0
 
-function getNextBirthday(fromDate){
-    const year = fromDate.getFullYear();
-    let birthday = new Date(year, BIRTHDAY_MONTH, BIRTHDAY_DAY, 0, 0, 0);
-    
-    if (fromDate > birthday) {
-        birthday = new Date(year + 1, BIRTHDAY_MONTH, BIRTHDAY_DAY, 0, 0, 0);
-    }
-    
-    return birthday;
+const BIRTH_YEAR = 2013;
+
+function getNextBirthday(){
+
+const now = new Date();
+
+let year = now.getFullYear();
+
+let birthday = new Date(
+year,
+BIRTHDAY_MONTH,
+BIRTHDAY_DAY,
+0,
+0,
+0
+);
+
+if(now >= birthday){
+year++;
 }
 
-function getBirthdayYear(birthday){
-    return birthday.getFullYear();
+return new Date(
+year,
+BIRTHDAY_MONTH,
+BIRTHDAY_DAY,
+0,
+0,
+0
+);
+
+}
+
+function getAge(){
+
+const now = new Date();
+
+let age =
+now.getFullYear() - BIRTH_YEAR;
+
+const birthdayThisYear = new Date(
+now.getFullYear(),
+BIRTHDAY_MONTH,
+BIRTHDAY_DAY,
+0,
+0,
+0
+);
+
+if(now < birthdayThisYear){
+age--;
+}
+
+return age;
+
+}
+
+function formatNumber(number){
+
+return String(number).padStart(2,"0");
+
 }
 
 function updateCountdown(){
-    const now = new Date();
-    
-    const nextBirthday = getNextBirthday(now);
-    const afterBirthday = new Date(getBirthdayYear(nextBirthday) + 1, BIRTHDAY_MONTH, BIRTHDAY_DAY, 0, 0, 0);
-    
-    // Обновляем даты
-    const nextDateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-    const afterDateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-    
-    document.getElementById('nextBirthdayDate').textContent = nextBirthday.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US', nextDateOptions);
-    document.getElementById('afterBirthdayDate').textContent = afterBirthday.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US', afterDateOptions);
-    
-    // Считаем разницу
-    const diffNext = nextBirthday - now;
-    const diffAfter = afterBirthday - now;
-    
-    const nextDays = Math.floor(diffNext / (1000 * 60 * 60 * 24));
-    const nextHours = Math.floor((diffNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const nextMinutes = Math.floor((diffNext % (1000 * 60 * 60)) / (1000 * 60));
-    const nextSeconds = Math.floor((diffNext % (1000 * 60)) / 1000);
-    
-    const afterDays = Math.floor(diffAfter / (1000 * 60 * 60 * 24));
-    const afterHours = Math.floor((diffAfter % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const afterMinutes = Math.floor((diffAfter % (1000 * 60 * 60)) / (1000 * 60));
-    const afterSeconds = Math.floor((diffAfter % (1000 * 60)) / 1000);
-    
-    // Обновляем таймеры
-    document.getElementById('nextDays').textContent = String(nextDays).padStart(2, '0');
-    document.getElementById('nextHours').textContent = String(nextHours).padStart(2, '0');
-    document.getElementById('nextMinutes').textContent = String(nextMinutes).padStart(2, '0');
-    document.getElementById('nextSeconds').textContent = String(nextSeconds).padStart(2, '0');
-    
-    document.getElementById('afterDays').textContent = String(afterDays).padStart(2, '0');
-    document.getElementById('afterHours').textContent = String(afterHours).padStart(2, '0');
-    document.getElementById('afterMinutes').textContent = String(afterMinutes).padStart(2, '0');
-    document.getElementById('afterSeconds').textContent = String(afterSeconds).padStart(2, '0');
+
+const now = new Date();
+
+const nextBirthday =
+getNextBirthday();
+
+const difference =
+nextBirthday.getTime() - now.getTime();
+
+const days =
+Math.floor(
+difference / (1000 * 60 * 60 * 24)
+);
+
+const hours =
+Math.floor(
+(difference % (1000 * 60 * 60 * 24))
+/ (1000 * 60 * 60)
+);
+
+const minutes =
+Math.floor(
+(difference % (1000 * 60 * 60))
+/ (1000 * 60)
+);
+
+const seconds =
+Math.floor(
+(difference % (1000 * 60))
+/ 1000
+);
+
+document.getElementById(
+"nextDays"
+).textContent =
+formatNumber(days);
+
+document.getElementById(
+"nextHours"
+).textContent =
+formatNumber(hours);
+
+document.getElementById(
+"nextMinutes"
+).textContent =
+formatNumber(minutes);
+
+document.getElementById(
+"nextSeconds"
+).textContent =
+formatNumber(seconds);
+
+const dateLocale =
+language === "ru"
+? "ru-RU"
+: "en-US";
+
+document.getElementById(
+"nextBirthdayDate"
+).textContent =
+nextBirthday.toLocaleDateString(
+dateLocale,
+{
+day:"numeric",
+month:"long",
+year:"numeric"
+}
+);
+
+const age =
+getAge();
+
+document.getElementById(
+"birthdayAge"
+).textContent =
+language === "ru"
+? `Сейчас мне ${age} лет`
+: `I am ${age} years old`;
+
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
+
+setInterval(
+updateCountdown,
+1000
+);
 
 
 /* ================================
