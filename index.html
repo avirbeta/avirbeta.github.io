@@ -6,6 +6,20 @@
 
 <title>Vizor — Developer</title>
 
+<meta name="theme-color" content="#0a0518">
+
+<meta name="description" content="Vizor — 13 лет, программирую с ИИ (GPT и AI-ассистенты). Minecraft-моды на оптимизацию, Java, Go, веб-разработка.">
+
+<meta property="og:title" content="Vizor — Developer">
+<meta property="og:description" content="Minecraft-моды, Java, Go и веб-разработка. Учусь программировать вместе с ИИ.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23c026ff'/><stop offset='1' stop-color='%2300e5ff'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%230a0518'/><text x='50' y='74' font-size='64' font-weight='900' font-family='Arial' text-anchor='middle' fill='url(%23g)'>V</text></svg>">
+
+<script>
+document.documentElement.classList.add("js");
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;850;900;950&display=swap" rel="stylesheet">
@@ -32,6 +46,7 @@
 
 html{
     scroll-behavior:smooth;
+    scroll-padding-top:86px;
 }
 
 body{
@@ -82,6 +97,125 @@ body::after{
         );
 }
 
+/* SELECTION + SCROLLBAR */
+
+::selection{
+    background:rgba(var(--c-purple-rgb),.4);
+    color:#fff;
+}
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#06040f;
+}
+
+::-webkit-scrollbar-thumb{
+    background:
+        linear-gradient(
+            180deg,
+            var(--c-purple),
+            var(--c-blue)
+        );
+
+    border-radius:6px;
+    border:2px solid #06040f;
+}
+
+/* SCROLL PROGRESS */
+
+.scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:3px;
+    z-index:2000;
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--c-purple),
+            var(--c-blue)
+        );
+
+    transform-origin:0 50%;
+    transform:scaleX(0);
+
+    box-shadow:0 0 12px rgba(var(--c-purple-rgb),.6);
+}
+
+/* BACKGROUND ORBS + GRID */
+
+.orb{
+    position:fixed;
+    z-index:-1;
+    border-radius:50%;
+    filter:blur(90px);
+    pointer-events:none;
+    opacity:.45;
+}
+
+.orb-1{
+    width:520px;
+    height:520px;
+    top:-160px;
+    left:-120px;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--c-purple),
+            transparent 65%
+        );
+
+    animation:orbFloat 22s ease-in-out infinite;
+}
+
+.orb-2{
+    width:460px;
+    height:460px;
+    bottom:-140px;
+    right:-100px;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--c-blue),
+            transparent 65%
+        );
+
+    animation:orbFloat 26s ease-in-out infinite reverse;
+}
+
+@keyframes orbFloat{
+    0%,100%{
+        transform:translate(0,0) scale(1);
+    }
+    50%{
+        transform:translate(40px,30px) scale(1.08);
+    }
+}
+
+.grid-overlay{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+
+    background-size:60px 60px;
+
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 75%);
+    mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 75%);
+}
+
 /* HEADER */
 
 header{
@@ -93,7 +227,10 @@ header{
 
     padding:15px 6%;
 
-    background:rgba(6,5,16,.96);
+    background:rgba(6,5,16,.85);
+
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    backdrop-filter:blur(16px) saturate(140%);
 
     border-bottom:1px solid rgba(255,255,255,.08);
 }
@@ -122,6 +259,19 @@ header{
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
+}
+
+.logo{
+    transition:transform .3s ease,filter .3s ease;
+    cursor:pointer;
+}
+
+.logo:hover{
+    transform:scale(1.06);
+
+    filter:
+        drop-shadow(0 0 14px rgba(var(--c-purple-rgb),.65))
+        drop-shadow(0 0 30px rgba(var(--c-blue-rgb),.35));
 }
 
 .nav-links{
@@ -347,6 +497,17 @@ header{
     background:#00ff9d;
 
     box-shadow:0 0 12px #00ff9d,0 0 24px rgba(0,255,157,.6);
+
+    animation:statusPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes statusPulse{
+    0%,100%{
+        box-shadow:0 0 12px #00ff9d,0 0 24px rgba(0,255,157,.55);
+    }
+    50%{
+        box-shadow:0 0 20px #00ff9d,0 0 42px rgba(0,255,157,.95);
+    }
 }
 
 .hero h1{
@@ -922,7 +1083,7 @@ section{
     display:grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(auto-fit,minmax(190px,1fr));
 
     gap:12px;
 }
@@ -1008,6 +1169,305 @@ footer{
     font-size:13px;
 }
 
+/* ENHANCEMENTS
+   hero entrance, reveal, marquee, timeline
+   и мобильное меню */
+
+/* HERO ENTRANCE */
+
+@keyframes heroFadeUp{
+    from{
+        opacity:0;
+        transform:translateY(26px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.hero .avatar{
+    animation:heroFadeUp .7s ease both;
+}
+
+.hero .status{
+    animation:heroFadeUp .7s .1s ease both;
+}
+
+.hero h1{
+    animation:heroFadeUp .7s .2s ease both;
+}
+
+.hero .hero-description{
+    animation:heroFadeUp .7s .3s ease both;
+}
+
+.hero .buttons{
+    animation:heroFadeUp .7s .4s ease both;
+}
+
+/* BUTTON SHINE */
+
+.button{
+    position:relative;
+    overflow:hidden;
+}
+
+.button::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-80%;
+    width:50%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+    transition:left .5s ease;
+}
+
+.button:hover::after{
+    left:130%;
+}
+
+/* SECTION TITLE UNDERLINE */
+
+.title{
+    position:relative;
+}
+
+.title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-14px;
+    height:4px;
+    width:64px;
+    border-radius:4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--c-purple),
+            var(--c-blue)
+        );
+
+    box-shadow:0 0 12px rgba(var(--c-purple-rgb),.6);
+}
+
+/* GLASS GRADIENT CARDS */
+
+.countdown-card,
+.card,
+.repo,
+.settings-panel{
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+}
+
+/* SCROLL REVEAL
+   (работает только при включённом JS:
+   классы видны, пока html не получит .js) */
+
+html.js .reveal{
+    opacity:0;
+    translate:0 28px;
+
+    transition:
+        opacity .7s ease,
+        translate .7s ease;
+}
+
+html.js .reveal.visible{
+    opacity:1;
+    translate:0 0;
+}
+
+html.js .card,
+html.js .tech,
+html.js .stat,
+html.js .social,
+html.js .repo{
+    transition:
+        opacity .7s ease,
+        translate .7s ease,
+        transform .25s,
+        border-color .25s,
+        box-shadow .25s,
+        background .25s;
+}
+
+/* MARQUEE */
+
+.marquee{
+    overflow:hidden;
+    padding:18px 0;
+
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+    background:rgba(10,8,22,.55);
+
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+
+    animation:marqueeMove 30s linear infinite;
+}
+
+.marquee-group{
+    display:flex;
+    gap:48px;
+    padding-right:48px;
+}
+
+.marquee-group span{
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+
+    color:#9d9db3;
+
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    white-space:nowrap;
+}
+
+.marquee-group i{
+    color:var(--c-purple);
+
+    font-style:normal;
+}
+
+@keyframes marqueeMove{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* TIMELINE */
+
+.timeline{
+    position:relative;
+
+    padding-left:28px;
+
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:11px;
+    top:6px;
+    bottom:6px;
+    width:2px;
+    border-radius:2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--c-purple),
+            var(--c-blue)
+        );
+
+    opacity:.6;
+}
+
+.timeline-item{
+    position:relative;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-28px;
+    top:7px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+
+    background:var(--c-blue);
+
+    box-shadow:
+        0 0 12px rgba(var(--c-blue-rgb),.85),
+        0 0 24px rgba(var(--c-blue-rgb),.35);
+}
+
+.timeline-year{
+    color:var(--c-purple-light);
+
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    margin-bottom:6px;
+}
+
+.timeline-text{
+    color:#a1a1aa;
+
+    font-size:16px;
+    line-height:1.7;
+}
+
+.timeline-text strong{
+    color:white;
+}
+
+/* HAMBURGER + MOBILE MENU */
+
+.hamburger{
+    display:none;
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce){
+
+    html,
+    html.js{
+        scroll-behavior:auto;
+    }
+
+    html.js .reveal{
+        opacity:1;
+        translate:0 0;
+        transition:none;
+    }
+
+    .hero .avatar,
+    .hero .status,
+    .hero h1,
+    .hero .hero-description,
+    .hero .buttons,
+    .status-dot,
+    .orb,
+    .marquee-track{
+        animation:none;
+    }
+}
+
 /* MOBILE */
 
 @media(max-width:800px){
@@ -1087,10 +1547,392 @@ footer{
         width:auto;
     }
 }
+
+/* HAMBURGER + MOBILE MENU
+   (размещено в самом конце CSS,
+   чтобы переопределить ранние
+   правила .nav-links) */
+
+.hamburger{
+    display:none;
+}
+
+@media(max-width:800px){
+
+    .hamburger{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+
+        width:38px;
+        height:38px;
+
+        border-radius:10px;
+
+        border:1px solid rgba(var(--c-purple-rgb),.5);
+
+        background:rgba(var(--c-purple-rgb),.1);
+
+        color:white;
+
+        font-size:17px;
+
+        cursor:pointer;
+
+        transition:.25s;
+    }
+
+    .hamburger:hover{
+        background:rgba(var(--c-purple-rgb),.28);
+    }
+
+    .hamburger span{
+        position:relative;
+        display:block;
+        width:16px;
+        height:2px;
+        border-radius:2px;
+
+        background:white;
+
+        transition:.25s;
+    }
+
+    .hamburger span::before,
+    .hamburger span::after{
+        content:"";
+        position:absolute;
+        width:16px;
+        height:2px;
+        border-radius:2px;
+
+        background:white;
+
+        transition:.25s;
+    }
+
+    .nav-open .hamburger span{
+        background:transparent;
+    }
+
+    .nav-open .hamburger span::before{
+        transform:rotate(45deg);
+    }
+
+    .nav-open .hamburger span::after{
+        transform:rotate(-45deg);
+    }
+
+    .nav-links{
+        position:fixed;
+        top:72px;
+        right:6%;
+        left:6%;
+
+        flex-direction:column;
+        gap:4px;
+
+        padding:16px;
+
+        border-radius:16px;
+
+        background:rgba(8,6,18,.97);
+
+        border:1px solid rgba(var(--c-purple-rgb),.35);
+
+        box-shadow:0 18px 50px rgba(0,0,0,.55);
+
+        max-width:none;
+        width:auto;
+        overflow:visible;
+        white-space:normal;
+
+        opacity:0;
+        visibility:hidden;
+        translate:0 -10px;
+
+        transition:
+            opacity .25s ease,
+            translate .25s ease,
+            visibility .25s;
+    }
+
+    .nav-open .nav-links{
+        opacity:1;
+        visibility:visible;
+        translate:0 0;
+    }
+
+    .nav-links a{
+        padding:11px 14px;
+        border-radius:10px;
+        font-size:14px;
+    }
+
+    .nav-links a:hover{
+        background:rgba(var(--c-purple-rgb),.15);
+    }
+}
+
+/* ROUND 2
+   active nav link, spotlight hover,
+   back-to-top, skeletons, focus, jokes */
+
+.nav-links a.active{
+    color:#fff;
+}
+
+.nav-links a.active::after{
+    content:"";
+    display:block;
+    height:2px;
+    margin-top:3px;
+    border-radius:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--c-purple),
+            var(--c-blue)
+        );
+}
+
+.spotlight{
+    position:relative;
+    overflow:hidden;
+}
+
+.spotlight::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+
+    opacity:0;
+    transition:opacity .35s ease;
+
+    background:
+        radial-gradient(
+            260px circle at var(--mx,50%) var(--my,50%),
+            rgba(var(--c-purple-rgb),.16),
+            transparent 70%
+        );
+}
+
+.spotlight:hover::before{
+    opacity:1;
+}
+
+.to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:900;
+
+    width:46px;
+    height:46px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    border:1px solid rgba(var(--c-blue-rgb),.5);
+
+    background:rgba(10,8,22,.9);
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    box-shadow:0 0 18px rgba(var(--c-blue-rgb),.35);
+
+    opacity:0;
+    visibility:hidden;
+    translate:0 12px;
+
+    transition:
+        opacity .3s ease,
+        translate .3s ease,
+        visibility .3s;
+}
+
+.to-top.show{
+    opacity:1;
+    visibility:visible;
+    translate:0 0;
+}
+
+.to-top:hover{
+    background:rgba(var(--c-blue-rgb),.2);
+    box-shadow:0 0 26px rgba(var(--c-blue-rgb),.6);
+}
+
+@keyframes skeletonShimmer{
+    from{
+        background-position:-200% 0;
+    }
+    to{
+        background-position:200% 0;
+    }
+}
+
+.skeleton{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 25%,
+            rgba(255,255,255,.1) 50%,
+            rgba(255,255,255,.04) 75%
+        );
+
+    background-size:200% 100%;
+
+    animation:skeletonShimmer 1.5s linear infinite;
+}
+
+.skeleton h3,
+.skeleton .repo-description{
+    height:14px;
+
+    border-radius:7px;
+
+    background:rgba(255,255,255,.07);
+}
+
+.skeleton h3{
+    width:55%;
+    height:18px;
+}
+
+.skeleton .repo-description{
+    width:88%;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible{
+    outline:2px solid var(--c-blue);
+    outline-offset:2px;
+    border-radius:8px;
+}
+
+.joke-card{
+    max-width:820px;
+
+    margin:auto;
+
+    padding:34px 30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    background:rgba(14,10,28,.96);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:transform .25s,border-color .25s;
+
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+}
+
+.joke-card:hover{
+    transform:translateY(-4px);
+
+    border-color:rgba(var(--c-blue-rgb),.45);
+
+    box-shadow:0 0 30px rgba(var(--c-blue-rgb),.18);
+}
+
+.joke-emoji{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.joke-text{
+    color:#e5e7eb;
+
+    font-size:19px;
+    font-weight:700;
+
+    line-height:1.6;
+
+    min-height:60px;
+
+    margin-bottom:22px;
+}
+
+.joke-card .joke-button{
+    -webkit-appearance:none;
+    appearance:none;
+
+    border:none;
+}
+
+.footer-nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px 20px;
+
+    margin-bottom:20px;
+}
+
+.footer-nav a{
+    color:#71717a;
+
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.footer-nav a:hover{
+    color:var(--c-purple-light);
+}
+
+@media(max-width:500px){
+
+    .to-top{
+        right:14px;
+        bottom:14px;
+        width:42px;
+        height:42px;
+    }
+}
 </style>
 </head>
 
 <body>
+
+<div
+class="scroll-progress"
+id="scrollProgress"
+aria-hidden="true">
+</div>
+
+<div
+class="grid-overlay"
+aria-hidden="true">
+</div>
+
+<div
+class="orb orb-1"
+aria-hidden="true">
+</div>
+
+<div
+class="orb orb-2"
+aria-hidden="true">
+</div>
 
 <!-- HEADER -->
 
@@ -1108,6 +1950,12 @@ Vizor
 data-ru="Обо мне"
 data-en="About">
 Обо мне
+</a>
+
+<a href="#journey"
+data-ru="Путь"
+data-en="Journey">
+Путь
 </a>
 
 <a href="#tech"
@@ -1134,6 +1982,15 @@ data-en="Contacts">
 class="lang-btn"
 id="languageButton">
 RU
+</button>
+
+<button
+class="hamburger"
+id="hamburgerButton"
+type="button"
+aria-label="Меню"
+aria-expanded="false">
+<span></span>
 </button>
 
 <button
@@ -1211,9 +2068,9 @@ draggable="false"
 <span class="status-dot"></span>
 
 <span
-data-ru="Изучаю программирование"
-data-en="Learning programming">
-Изучаю программирование
+data-ru="Учусь программировать с ИИ"
+data-en="Learning to code with AI">
+Учусь программировать с ИИ
 </span>
 
 </div>
@@ -1224,10 +2081,12 @@ Vizor
 
 <p
 class="hero-description"
-data-ru="Мне 13 лет, я учусь в 8 классе и изучаю программирование. Создаю Minecraft-моды, занимаюсь оптимизацией, экспериментирую с Java, Fabric, Go и веб-разработкой."
-data-en="I'm 13 years old, I'm in 8th grade and I'm learning programming. I create Minecraft mods, work on optimization and experiment with Java, Fabric, Go and web development."
+data-ru="Мне 13 лет, я учусь в 8 классе и изучаю программирование с помощью искусственного интеллекта — больших языковых моделей (GPT) и AI-ассистентов для кода. Создаю Minecraft-моды, занимаюсь оптимизацией, экспериментирую с Java, Fabric, Go и веб-разработкой."
+data-en="I'm 13 years old, I'm in 8th grade and I'm learning programming with the help of artificial intelligence — large language models (GPT) and AI code assistants. I create Minecraft mods, work on optimization and experiment with Java, Fabric, Go and web development."
 >
-Мне 13 лет, я учусь в 8 классе и изучаю программирование.
+Мне 13 лет, я учусь в 8 классе и изучаю программирование
+с помощью искусственного интеллекта — больших языковых
+моделей (GPT) и AI-ассистентов для кода.
 Создаю Minecraft-моды, занимаюсь оптимизацией,
 экспериментирую с Java, Fabric, Go и веб-разработкой.
 </p>
@@ -1257,6 +2116,43 @@ data-en="View projects">
 </div>
 
 </section>
+
+
+<!-- MARQUEE -->
+
+<div class="marquee" aria-hidden="true">
+
+<div class="marquee-track">
+
+<div class="marquee-group">
+
+<span><i>⛏️</i> Minecraft</span>
+<span><i>☕</i> Java</span>
+<span><i>🧵</i> Fabric</span>
+<span><i>🐹</i> Go</span>
+<span><i>🌐</i> Web</span>
+<span><i>⚡</i> Оптимизация</span>
+<span><i>🐧</i> Linux</span>
+<span><i>💻</i> Windows</span>
+
+</div>
+
+<div class="marquee-group">
+
+<span><i>⛏️</i> Minecraft</span>
+<span><i>☕</i> Java</span>
+<span><i>🧵</i> Fabric</span>
+<span><i>🐹</i> Go</span>
+<span><i>🌐</i> Web</span>
+<span><i>⚡</i> Оптимизация</span>
+<span><i>🐧</i> Linux</span>
+<span><i>💻</i> Windows</span>
+
+</div>
+
+</div>
+
+</div>
 
 
 <!-- COUNTDOWN -->
@@ -1390,11 +2286,13 @@ data-en="Who am I?">
 
 <p
 class="about-text"
-data-ru="Привет! Я Vizor. Мне 13 лет, я учусь в 8 классе и самостоятельно изучаю программирование. Мне нравится разбираться в компьютерах, операционных системах, Minecraft и новых технологиях."
-data-en="Hi! I'm Vizor. I'm 13 years old, I'm in 8th grade and I study programming on my own. I enjoy learning about computers, operating systems, Minecraft and new technologies."
+data-ru="Привет! Я Vizor. Мне 13 лет, я учусь в 8 классе и изучаю программирование с помощью искусственного интеллекта — больших языковых моделей (GPT) и AI-ассистентов для кода. Мне нравится разбираться в компьютерах, операционных системах, Minecraft и новых технологиях."
+data-en="Hi! I'm Vizor. I'm 13 years old, I'm in 8th grade and I'm learning programming with the help of artificial intelligence — large language models (GPT) and AI code assistants. I enjoy learning about computers, operating systems, Minecraft and new technologies."
 >
 Привет! Я Vizor. Мне 13 лет, я учусь в 8 классе
-и самостоятельно изучаю программирование.
+и изучаю программирование с помощью искусственного
+интеллекта — больших языковых моделей (GPT)
+и AI-ассистентов для кода.
 Мне нравится разбираться в компьютерах,
 операционных системах, Minecraft и новых технологиях.
 </p>
@@ -1505,6 +2403,84 @@ Minecraft-моды
 </section>
 
 
+<!-- JOURNEY -->
+
+<section id="journey">
+
+<div class="container">
+
+<div class="label">
+02 / JOURNEY
+</div>
+
+<h2
+class="title"
+data-ru="Мой путь"
+data-en="My journey">
+Мой путь
+</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+2024
+</div>
+
+<div
+class="timeline-text"
+data-ru="Заинтересовался компьютерами и операционными системами. Начал изучать, как всё устроено внутри."
+data-en="Got interested in computers and operating systems. Started learning how everything works under the hood.">
+Заинтересовался компьютерами и операционными
+системами. Начал изучать, как всё устроено внутри.
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+2025
+</div>
+
+<div
+class="timeline-text"
+data-ru="Сделал первые шаги в программировании. Открыл для себя Minecraft-моды и среду разработки."
+data-en="Made the first steps in programming. Discovered Minecraft mods and development tools.">
+Сделал первые шаги в программировании.
+Открыл для себя Minecraft-моды и среду разработки.
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+2026
+</div>
+
+<div
+class="timeline-text"
+data-ru="Программирую вместе с <strong>ИИ</strong> — большими языковыми моделями (GPT) и AI-ассистентами. Осваиваю <strong>Java</strong> для модов, <strong>Go</strong> для экспериментов и <strong>веб-разработку</strong>. Работаю над модами на оптимизацию."
+data-en="Coding together with <strong>AI</strong> — large language models (GPT) and AI assistants. Learning <strong>Java</strong> for mods, <strong>Go</strong> for experiments and <strong>web development</strong>. Working on optimization mods.">
+Программирую вместе с <strong>ИИ</strong> —
+большими языковыми моделями (GPT)
+и AI-ассистентами. Осваиваю <strong>Java</strong>
+для модов, <strong>Go</strong> для экспериментов
+и <strong>веб-разработку</strong>.
+Работаю над модами на оптимизацию.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
 <!-- SKILLS -->
 
 <section id="tech">
@@ -1512,7 +2488,7 @@ Minecraft-моды
 <div class="container">
 
 <div class="label">
-02 / SKILLS
+03 / SKILLS
 </div>
 
 <h2
@@ -1628,7 +2604,7 @@ data-en="Setup and optimization">
 <div class="container">
 
 <div class="label">
-03 / GITHUB
+04 / GITHUB
 </div>
 
 <h2
@@ -1719,7 +2695,7 @@ data-en="Languages">
 <div class="container">
 
 <div class="label">
-04 / PROJECTS
+05 / PROJECTS
 </div>
 
 <h2
@@ -1740,6 +2716,32 @@ data-en="Loading projects from GitHub...">
 Загружаю проекты с GitHub...
 </div>
 
+<article class="repo skeleton">
+<h3></h3>
+<div class="repo-description"></div>
+<div class="tags">
+<span class="tag" style="width:48px;height:20px;background:rgba(255,255,255,.07);box-shadow:none"></span>
+<span class="tag" style="width:70px;height:20px;background:rgba(255,255,255,.07);box-shadow:none"></span>
+</div>
+</article>
+
+<article class="repo skeleton">
+<h3></h3>
+<div class="repo-description"></div>
+<div class="tags">
+<span class="tag" style="width:56px;height:20px;background:rgba(255,255,255,.07);box-shadow:none"></span>
+</div>
+</article>
+
+<article class="repo skeleton">
+<h3></h3>
+<div class="repo-description"></div>
+<div class="tags">
+<span class="tag" style="width:64px;height:20px;background:rgba(255,255,255,.07);box-shadow:none"></span>
+<span class="tag" style="width:44px;height:20px;background:rgba(255,255,255,.07);box-shadow:none"></span>
+</div>
+</article>
+
         </div>
 
     </div>
@@ -1754,7 +2756,7 @@ data-en="Loading projects from GitHub...">
 <div class="container">
 
 <div class="label">
-05 / CONTACTS
+06 / CONTACTS
 </div>
 
 <h2
@@ -1773,7 +2775,7 @@ target="_blank"
 rel="noopener noreferrer">
 
 <div class="social-name">
-GitHub
+🐙 GitHub
 </div>
 
 <div class="social-link">
@@ -1789,7 +2791,7 @@ target="_blank"
 rel="noopener noreferrer">
 
 <div class="social-name">
-TikTok
+🎵 TikTok
 </div>
 
 <div class="social-link">
@@ -1800,35 +2802,79 @@ TikTok
 
 <a
 class="social"
-href="https://t.me/VizorVerze"
+href="https://youtube.com/@vizorverze"
 target="_blank"
 rel="noopener noreferrer">
 
 <div class="social-name">
-Telegram
+▶️ YouTube
 </div>
 
 <div class="social-link">
-@VizorVerze
+@vizorverze
 </div>
 
 </a>
 
 <a
 class="social"
-href="https://discord.com/invite/znas97AXs"
-target="_blank"
-rel="noopener noreferrer">
+href="mailto:vany201847dody@gmail.com">
 
 <div class="social-name">
-Discord
+📧 Email
 </div>
 
 <div class="social-link">
-Vizor Community
+vany201847dody@gmail.com
 </div>
 
 </a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- JOKES -->
+
+<section id="jokes" style="content-visibility:visible">
+
+<div class="container">
+
+<div class="label">
+07 / DEV JOKES
+</div>
+
+<h2
+class="title"
+data-ru="Шутки программистов"
+data-en="Programmer jokes">
+Шутки программистов
+</h2>
+
+<div class="joke-card">
+
+<div
+class="joke-emoji"
+id="jokeEmoji">
+😂
+</div>
+
+<div
+class="joke-text"
+id="jokeText">
+</div>
+
+<button
+class="button primary joke-button"
+id="jokeButton"
+type="button"
+data-ru="Ещё шутку"
+data-en="Another joke">
+Ещё шутку
+</button>
 
 </div>
 
@@ -1843,6 +2889,40 @@ Vizor Community
 Vizor
 </div>
 
+<nav class="footer-nav">
+
+<a href="#about"
+data-ru="Обо мне"
+data-en="About">
+Обо мне
+</a>
+
+<a href="#journey"
+data-ru="Путь"
+data-en="Journey">
+Путь
+</a>
+
+<a href="#tech"
+data-ru="Навыки"
+data-en="Skills">
+Навыки
+</a>
+
+<a href="#projects"
+data-ru="Проекты"
+data-en="Projects">
+Проекты
+</a>
+
+<a href="#jokes"
+data-ru="Шутки"
+data-en="Jokes">
+Шутки
+</a>
+
+</nav>
+
 <div
 class="footer-text"
 data-ru="13 лет · 8 класс · Minecraft · Программирование · 2026"
@@ -1851,6 +2931,15 @@ data-en="13 years old · 8th grade · Minecraft · Programming · 2026">
 </div>
 
 </footer>
+
+<button
+class="to-top"
+id="toTopButton"
+type="button"
+aria-label="Наверх"
+title="Наверх">
+↑
+</button>
 
 
 <script>
@@ -1934,6 +3023,10 @@ document.getElementById(
 "languageButton"
 );
 
+let renderedJokeIndex = -1;
+
+var renderJoke = function(){};
+
 function updateLanguage(){
 
 document.documentElement.lang =
@@ -1945,7 +3038,7 @@ document
 )
 .forEach(element=>{
 
-element.textContent =
+element.innerHTML =
 element.dataset[language];
 
 });
@@ -1964,6 +3057,10 @@ if(typeof updateCountdown === "function"){
 updateCountdown();
 }
 
+if(typeof renderJoke === "function"){
+renderJoke();
+}
+
 }
 
 languageButton.addEventListener(
@@ -1980,7 +3077,469 @@ updateLanguage();
 }
 );
 
+document.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key.toLowerCase() !== "r"
+){
+return;
+}
+
+if(
+event.target.tagName === "INPUT"
+||
+event.target.tagName === "TEXTAREA"
+){
+return;
+}
+
+language =
+language === "ru"
+? "en"
+: "ru";
+
 updateLanguage();
+
+}
+);
+
+updateLanguage();
+
+
+/* ================================
+   ENHANCEMENTS
+   reveal on scroll, scroll progress,
+   animated counters, mobile menu
+================================ */
+
+document
+.querySelectorAll(
+".label,.title,.timeline,"+
+".about-grid>.card,"+
+".tech-grid>.tech,"+
+".stats>.stat,"+
+".repos>.repo:not(.skeleton),"+
+".social-grid>.social"
+)
+.forEach(element=>{
+
+element.classList.add("reveal");
+
+});
+
+const revealObserver =
+new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add(
+"visible"
+);
+
+revealObserver.unobserve(
+entry.target
+);
+
+}
+
+});
+
+},{
+threshold:.12
+});
+
+function scanReveals(){
+
+document
+.querySelectorAll(".reveal:not(.visible)")
+.forEach(element=>{
+
+revealObserver.observe(element);
+
+});
+
+}
+
+scanReveals();
+
+/* scroll progress */
+
+const scrollProgress =
+document.getElementById(
+"scrollProgress"
+);
+
+function updateScrollProgress(){
+
+const max =
+document.documentElement.scrollHeight
+- window.innerHeight;
+
+scrollProgress.style.transform =
+"scaleX("
++ (
+max > 0
+? window.scrollY / max
+: 0
+)
++ ")";
+
+}
+
+window.addEventListener(
+"scroll",
+updateScrollProgress,
+{passive:true}
+);
+
+window.addEventListener(
+"resize",
+updateScrollProgress
+);
+
+updateScrollProgress();
+
+/* animated counters */
+
+function animateNumber(element,value){
+
+const start = performance.now();
+
+const duration = 900;
+
+function step(now){
+
+const progress = Math.min(
+1,
+(now - start) / duration
+);
+
+const eased =
+1 - Math.pow(1 - progress,3);
+
+element.textContent =
+Math.round(value * eased);
+
+if(progress < 1){
+
+requestAnimationFrame(step);
+
+}
+
+}
+
+requestAnimationFrame(step);
+
+}
+
+/* mobile menu */
+
+const hamburger =
+document.getElementById(
+"hamburgerButton"
+);
+
+const pageHeader =
+document.querySelector("header");
+
+if(hamburger && pageHeader){
+
+hamburger.addEventListener(
+"click",
+()=>{
+
+const isOpen =
+pageHeader.classList.toggle(
+"nav-open"
+);
+
+hamburger.setAttribute(
+"aria-expanded",
+String(isOpen)
+);
+
+}
+);
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link=>{
+
+link.addEventListener(
+"click",
+()=>{
+
+pageHeader.classList.remove(
+"nav-open"
+);
+
+hamburger.setAttribute(
+"aria-expanded",
+"false"
+);
+
+}
+
+);
+
+});
+
+}
+
+
+/* ================================
+   ROUND 2
+   scroll-spy, spotlight hover,
+   back to top, programmer jokes
+================================ */
+
+/* scroll-spy: active nav link */
+
+const navLinks =
+Array.from(
+document.querySelectorAll(
+"header .nav-links a[href^='#']"
+)
+);
+
+const spySections =
+navLinks
+.map(
+link=>document.querySelector(
+link.getAttribute("href")
+)
+)
+.filter(Boolean);
+
+const spyObserver =
+new IntersectionObserver(
+(entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const activeId =
+"#" + entry.target.id;
+
+navLinks.forEach(link=>{
+
+link.classList.toggle(
+"active",
+link.getAttribute("href") === activeId
+);
+
+});
+
+}
+
+});
+
+},
+{
+rootMargin:"-35% 0px -60% 0px"
+}
+);
+
+spySections.forEach(
+section=>spyObserver.observe(section)
+);
+
+/* spotlight hover */
+
+document
+.querySelectorAll(
+".card,.tech,.stat,.social,.repo,.joke-card"
+)
+.forEach(card=>{
+
+card.classList.add("spotlight");
+
+card.addEventListener(
+"pointermove",
+event=>{
+
+const bounds =
+card.getBoundingClientRect();
+
+card.style.setProperty(
+"--mx",
+(
+(event.clientX - bounds.left)
+/ bounds.width * 100
+) + "%"
+);
+
+card.style.setProperty(
+"--my",
+(
+(event.clientY - bounds.top)
+/ bounds.height * 100
+) + "%"
+);
+
+}
+
+);
+
+});
+
+/* back to top */
+
+const toTopButton =
+document.getElementById(
+"toTopButton"
+);
+
+if(toTopButton){
+
+window.addEventListener(
+"scroll",
+()=>{
+
+toTopButton.classList.toggle(
+"show",
+window.scrollY > 600
+);
+
+},
+{passive:true}
+);
+
+toTopButton.addEventListener(
+"click",
+()=>{
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+);
+
+}
+
+/* programmer jokes */
+
+const JOKES = [
+{
+ru:"Почему программисты путают Хэллоуин и Рождество? Потому что OCT 31 = DEC 25.",
+en:"Why do programmers mix up Halloween and Christmas? Because OCT 31 = DEC 25.",
+emoji:"💡"
+},
+{
+ru:"Существуют 10 типов людей: те, кто понимает двоичную систему, и те, кто нет.",
+en:"There are 10 types of people: those who understand binary, and those who don't.",
+emoji:"🔢"
+},
+{
+ru:"Как программист меняет лампочку? Никак — это аппаратная проблема.",
+en:"How does a programmer change a light bulb? They don't — that's a hardware problem.",
+emoji:"🪛"
+},
+{
+ru:"— Это баг или фича? — Это не баг, это скрытая возможность.",
+en:"— Is it a bug or a feature? — It's not a bug, it's an unintended feature.",
+emoji:"🫣"
+},
+{
+ru:"Программист не спорит. Он спокойно говорит: «У меня всё работает».",
+en:"A programmer never argues. They calmly say: \"It works on my machine\".",
+emoji:"💬"
+},
+{
+ru:"Наказывать баги бесполезно: они только плодятся.",
+en:"Punishing bugs is useless — they just reproduce.",
+emoji:"🐛"
+},
+{
+ru:"Мой код не работает, и я не знаю почему. Мой код работает — и я тоже не знаю почему.",
+en:"My code doesn't work and I don't know why. My code works — and I also don't know why.",
+emoji:"🤷"
+},
+{
+ru:"Оптимизация — это когда код работает. Просто медленно. Но работает же!",
+en:"Optimization is when the code works. Just slowly. But it works!",
+emoji:"🐫"
+},
+{
+ru:"— Это стабильная версия? — Да, если её не трогать.",
+en:"— Is this the stable release? — Yes, as long as nobody touches it.",
+emoji:"📦"
+},
+{
+ru:"Лучший дебаггер — уверенность в том, что после перезагрузки всё заработает.",
+en:"The best debugger is the confidence that everything will work after a reboot.",
+emoji:"🔄"
+}
+];
+
+renderJoke = function(){
+
+const joke =
+JOKES[renderedJokeIndex];
+
+if(!joke){
+return;
+}
+
+const emoji =
+document.getElementById(
+"jokeEmoji"
+);
+
+const text =
+document.getElementById(
+"jokeText"
+);
+
+if(emoji){
+emoji.textContent =
+joke.emoji;
+}
+
+if(text){
+text.textContent =
+language === "ru"
+? joke.ru
+: joke.en;
+}
+
+};
+
+const jokeButton =
+document.getElementById(
+"jokeButton"
+);
+
+if(jokeButton){
+
+jokeButton.addEventListener(
+"click",
+()=>{
+
+renderedJokeIndex =
+(
+renderedJokeIndex + 1
+) % JOKES.length;
+
+renderJoke();
+
+}
+
+);
+
+renderedJokeIndex = 0;
+
+renderJoke();
+
+}
 
 
 /* ================================
@@ -2512,25 +4071,33 @@ repo.language
 });
 
 
+animateNumber(
 document.getElementById(
 "repoCount"
-).textContent =
-repositories.length;
+),
+repositories.length
+);
 
+animateNumber(
 document.getElementById(
 "starCount"
-).textContent =
-stars;
+),
+stars
+);
 
+animateNumber(
 document.getElementById(
 "forkCount"
-).textContent =
-forks;
+),
+forks
+);
 
+animateNumber(
 document.getElementById(
 "languageCount"
-).textContent =
-languages.size;
+),
+languages.size
+);
 
 
 container.innerHTML = "";
@@ -2582,7 +4149,7 @@ const card =
 document.createElement("article");
 
 card.className =
-"repo";
+"repo reveal";
 
 
 card.innerHTML = `
@@ -2637,6 +4204,8 @@ ${tags}
 container.appendChild(card);
 
 }
+
+scanReveals();
 
 }
 
@@ -2842,11 +4411,12 @@ https://github.com/vany201847dody-art
 TikTok:
 https://tiktok.com/@vizorverze
 
-Telegram:
-https://t.me/VizorVerze
+YouTube:
+https://youtube.com/@vizorverze
 
-Discord:
-https://discord.com/invite/znas97AXs
+Email:
+vany201847dody@gmail.com
+
 `;
 
 event.clipboardData.setData(
