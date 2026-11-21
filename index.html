@@ -13,6 +13,22 @@
 <meta property="og:title" content="avirbeta — Developer">
 <meta property="og:description" content="Minecraft-моды, Java, Go и веб-разработка. Учусь программировать вместе с ИИ.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://avirbeta.github.io/">
+<meta property="og:site_name" content="avirbeta">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://avirbeta.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="avirbeta — Developer">
+<meta name="twitter:description" content="Minecraft-моды, Java, Go и веб-разработка. Учусь программировать вместе с ИИ.">
+<meta name="twitter:image" content="https://avirbeta.github.io/og-image.jpg">
+
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://avirbeta.github.io/">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23c026ff'/><stop offset='1' stop-color='%2300e5ff'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%230a0518'/><text x='50' y='74' font-size='64' font-weight='900' font-family='Arial' text-anchor='middle' fill='url(%23g)'>A</text></svg>">
 
@@ -1909,6 +1925,24 @@ input:focus-visible{
     }
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "avirbeta",
+  "url": "https://avirbeta.github.io/",
+  "image": "https://avirbeta.github.io/og-image.jpg",
+  "jobTitle": "Developer",
+  "description": "Minecraft-моды, Java, Go и веб-разработка.",
+  "sameAs": [
+    "https://github.com/avirbeta",
+    "https://youtube.com/@avirbeta",
+    "https://tiktok.com/@vizorverze"
+  ],
+  "knowsAbout": ["Java", "Go", "JavaScript", "Minecraft", "Linux", "Web development"]
+}
+</script>
 </head>
 
 <body>
@@ -1980,7 +2014,9 @@ data-en="Contacts">
 
 <button
 class="lang-btn"
-id="languageButton">
+id="languageButton"
+type="button"
+aria-label="Переключить язык / Switch language">
 RU
 </button>
 
@@ -2816,7 +2852,7 @@ rel="noopener noreferrer">
 
 </a>
 
-<a class="social" href="#" onclick="this.href=String.fromCharCode(109,97,105,108,116,111,58)+[&quot;vany&quot;,&quot;2018&quot;,&quot;47dody&quot;].join(&quot;&quot;)+&quot;@gmail.com&quot;;return true;">
+<a class="social" id="emailLink" href="#" onclick="this.href=String.fromCharCode(109,97,105,108,116,111,58)+[&quot;vany&quot;,&quot;2018&quot;,&quot;47dody&quot;].join(&quot;&quot;)+&quot;@gmail.com&quot;;return true;">
 
 <div class="social-name">
 📧 Email
@@ -4015,7 +4051,10 @@ if(cached){
 
 renderRepositories(
 container,
-cached.repositories
+cached.repositories.filter(
+repo =>
+!HIDDEN_REPOS.has(repo.name)
+)
 );
 
 return;
@@ -4420,6 +4459,24 @@ selected + copyright
 event.preventDefault();
 
 });
+
+/* Email: ставим href сразу, чтобы работали клавиатура и средняя кнопка мыши */
+(function initEmailLink(){
+
+const link =
+document.getElementById(
+"emailLink"
+);
+
+if(!link)
+return;
+
+link.href =
+String.fromCharCode(109,97,105,108,116,111,58)
++ ["vany","2018","47dody"].join("")
++ "@gmail.com";
+
+})();
 
 </script>
 
